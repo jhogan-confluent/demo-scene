@@ -21,7 +21,8 @@ resource "random_string" "random_string" {
 }
 
 data "template_file" "bucket_pacman" {
-  template = "pacman${random_string.random_string.result}"
+  //template = "pacman${random_string.random_string.result}"
+  template = "${var.s3_bucket_name}"
 }
 
 resource "aws_s3_bucket" "pacman" {
@@ -32,6 +33,7 @@ resource "aws_s3_bucket" "pacman" {
     allowed_methods = ["GET", "POST"]
     allowed_origins = ["*"]
   }
+  force_destroy = "true" //REMEMBER TO DISABLE
   policy = <<EOF
 {
     "Version": "2008-10-17",
@@ -59,6 +61,10 @@ variable "aws_secret_key" {
 }
 
 variable "aws_region" {
+}
+
+variable "s3_bucket_name" {
+  
 }
 
 ###########################################

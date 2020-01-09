@@ -23,6 +23,13 @@ resource "aws_s3_bucket_object" "start" {
   source = "../../pacman/start.html"
 }
 
+resource "aws_s3_bucket_object" "scoreboard" {
+  bucket = aws_s3_bucket.pacman.bucket
+  key = "scoreboard.html"
+  content_type = "text/html"
+  source = "../../pacman/scoreboard.html"
+}
+
 ###########################################
 ################### CSS ###################
 ###########################################
@@ -93,6 +100,7 @@ variable "js_files" {
     "game/js/paths.js",
     "game/js/sound.js",
     "game/js/game.js",
+    "game/js/ksql.js",
     "game/js/tools.js"
   ]
 }

@@ -5,3 +5,4 @@
 aws_access_key = "<AWS_ACCESS_KEY>"
 aws_secret_key = "<AWS_SECRET_KEY>"
 aws_region = "<AWS_REGION>"
+s3_bucket_name     = "<UNIQUE_S3_BUCKET_NAME>"

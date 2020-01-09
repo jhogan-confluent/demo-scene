@@ -6,6 +6,7 @@ var PAUSE = false;
 var LOCK = false;
 
 var HIGHSCORE = 0;
+var RANKING = "-";
 var SCORE = 0;
 var SCORE_BUBBLE = 10;
 var SCORE_SUPER_BUBBLE = 50;
@@ -26,12 +27,24 @@ var TIME_FRUITS = 0;
 
 var HELP_DELAY = 1500;
 var HELP_TIMER = -1;
-			
+
+// Setting intervals to check score
+window.setInterval(function(){
+	/// call your function here
+	updatePanel();
+  }, 5000);
+
 function blinkHelp() { 
 	if ( $('.help-button').attr("class").indexOf("yo") > -1 ) { 
 		$('.help-button').removeClass("yo");
 	} else { 
 		$('.help-button').addClass("yo");
+	}
+
+	if ( $('.scoreboard-button').attr("class").indexOf("yo") > -1 ) { 
+		$('.scoreboard-button').removeClass("yo");
+	} else { 
+		$('.scoreboard-button').addClass("yo");
 	}
 }
 
@@ -424,45 +437,6 @@ function produceRecord(topic, record) {
 
 }
 
-function readScore(){
-	var contentType = "application/vnd.ksql.v1+json; charset=utf-8";
-	var url = KSQL_DB_URL;
-	var requestObj = { 
-		"ksql": "SELECT `HIGHEST_SCORE` FROM STATS_PER_USER WHERE ROWKEY = '"+window.name+"';", 
-		"streamsProperties": {}
-	};
-	var json = JSON.stringify(requestObj);
-	
-	// Create a request variable and assign a new XMLHttpRequest object to it.
-	const request = new XMLHttpRequest()
 
-	// Open a new connection, using the GET request on the URL endpoint
-	request.open("POST", url, true)
 
-	request.onload = function() {
-	
-		var data = JSON.parse(this.response);
-		console.log(data);
 
-		// if (request.status >= 200 && request.status < 400) {
-		// 	data.forEach(movie => {
-		// 	console.log(movie.title)
-		// 	})
-		// } else {
-		// 	console.log('error')
-		// }
-	}
-
-	// Send request
-	request.send(json)
-}
-
-/**
- * 
- * curl -X "POST" "http://localhost:8088/query" \
-     -H "Content-Type: application/vnd.ksql.v1+json; charset=utf-8" \
-     -d $'{
-  "ksql": "SELECT * FROM TEST_STREAM;",
-  "streamsProperties": {}
-}'
- */
