@@ -3,28 +3,28 @@
 ###########################################
 
 resource "aws_s3_bucket_object" "index" {
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = "index.html"
   content_type = "text/html"
   source = "../../pacman/index.html"
 }
 
 resource "aws_s3_bucket_object" "error" {
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = "error.html"
   content_type = "text/html"
   source = "../../pacman/error.html"
 }
 
 resource "aws_s3_bucket_object" "start" {
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = "start.html"
   content_type = "text/html"
   source = "../../pacman/start.html"
 }
 
 resource "aws_s3_bucket_object" "scoreboard" {
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = "scoreboard.html"
   content_type = "text/html"
   source = "../../pacman/scoreboard.html"
@@ -45,7 +45,7 @@ variable "css_files" {
 
 resource "aws_s3_bucket_object" "css_files" {
   count = length(var.css_files)
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = var.css_files[count.index]
   content_type = "text/css"
   source = "../../pacman/${var.css_files[count.index]}"
@@ -75,7 +75,7 @@ variable "img_files" {
 
 resource "aws_s3_bucket_object" "img_files" {
   count = length(var.img_files)
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = var.img_files[count.index]
   content_type = "images/png"
   source = "../../pacman/${var.img_files[count.index]}"
@@ -108,28 +108,28 @@ variable "js_files" {
 
 resource "aws_s3_bucket_object" "js_files" {
   count = length(var.js_files)
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = var.js_files[count.index]
   content_type = "text/javascript"
   source = "../../pacman/${var.js_files[count.index]}"
 }
 
-data "template_file" "variables_js" {
-  template = file("../../pacman/game/js/variables.js")
-  vars = {
-    ksqldb_query_api = "http://${aws_alb.ksqldb_lbr.dns_name}/query"
-    event_handler_api = "${aws_api_gateway_deployment.event_handler_v1.invoke_url}${aws_api_gateway_resource.event_handler_resource.path}"
-    highest_score_api = "${aws_api_gateway_deployment.highest_score_v1.invoke_url}${aws_api_gateway_resource.highest_score_resource.path}"
-    cloud_provider = "AWS"
-  }
-}
+# data "template_file" "variables_js" {
+#   template = file("../../pacman/game/js/variables.js")
+#   vars = {
+#     ksqldb_query_api = "http://${aws_alb.ksqldb_lbr.dns_name}/query"
+#     event_handler_api = "${aws_api_gateway_deployment.event_handler_v1.invoke_url}${aws_api_gateway_resource.event_handler_resource.path}"
+#     highest_score_api = "${aws_api_gateway_deployment.highest_score_v1.invoke_url}${aws_api_gateway_resource.highest_score_resource.path}"
+#     cloud_provider = "AWS"
+#   }
+# }
 
-resource "aws_s3_bucket_object" "variables_js" {
-  bucket = data.aws_s3_bucket.pacman.bucket
-  key = "game/js/variables.js"
-  content_type = "text/javascript"
-  content = data.template_file.variables_js.rendered
-}
+# resource "aws_s3_bucket_object" "variables_js" {
+#   bucket = aws_s3_bucket.pacman.bucket
+#   key = "game/js/variables.js"
+#   content_type = "text/javascript"
+#   content = data.template_file.variables_js.rendered
+# }
 
 ###########################################
 ################# Sounds ##################
@@ -153,7 +153,7 @@ variable "snd_files" {
 
 resource "aws_s3_bucket_object" "snd_files" {
   count = length(var.snd_files)
-  bucket = data.aws_s3_bucket.pacman.bucket
+  bucket = aws_s3_bucket.pacman.bucket
   key = var.snd_files[count.index]
   content_type = "audio/mpeg"
   source = "../../pacman/${var.snd_files[count.index]}"
