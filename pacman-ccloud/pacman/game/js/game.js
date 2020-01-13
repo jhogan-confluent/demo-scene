@@ -1,4 +1,5 @@
-const PROVIDER = "${cloud_provider}";
+//defined in variable file
+//const PROVIDER = "${cloud_provider}";
 
 var KEYDOWN = false;
 var PAUSE = false;
