@@ -119,7 +119,7 @@ data "template_file" "variables_js" {
   vars = {
     ksqldb_query_api = "http://${aws_alb.ksqldb_lbr.dns_name}/query"
     event_handler_api = "${aws_api_gateway_deployment.event_handler_v1.invoke_url}${aws_api_gateway_resource.event_handler_resource.path}"
-    highest_score_api = "${aws_api_gateway_deployment.highest_score_v1.invoke_url}${aws_api_gateway_resource.highest_score_resource.path}"
+    //highest_score_api = "${aws_api_gateway_deployment.highest_score_v1.invoke_url}${aws_api_gateway_resource.highest_score_resource.path}"
     cloud_provider = "AWS"
   }
 }
