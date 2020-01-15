@@ -64,7 +64,7 @@ data "template_file" "ksqldb_server_definition" {
     ksqldb_server_image = var.ksqldb_server_image
     logs_region = local.region
     global_prefix = var.global_prefix
-    access_control_allow_origin = "http://${aws_s3_bucket.pacman.website_endpoint}"
+    access_control_allow_origin = "http://${data.aws_s3_bucket.pacman.website_endpoint}"
     access_control_allow_methods = "OPTIONS,POST"
     access_control_allow_headers = "*"
   }

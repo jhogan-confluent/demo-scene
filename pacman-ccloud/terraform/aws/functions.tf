@@ -107,7 +107,7 @@ resource "aws_api_gateway_integration_response" "event_handler_options_integrati
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'*'"
     "method.response.header.Access-Control-Allow-Methods" = "'POST'"
-    "method.response.header.Access-Control-Allow-Origin" = "'http://${aws_s3_bucket.pacman.website_endpoint}'"
+    "method.response.header.Access-Control-Allow-Origin" = "'http://${data.aws_s3_bucket.pacman.website_endpoint}'"
   }
 }
 
@@ -171,7 +171,7 @@ resource "aws_lambda_function" "event_handler_function" {
       BOOTSTRAP_SERVERS = var.bootstrap_server
       CLUSTER_API_KEY = var.cluster_api_key
       CLUSTER_API_SECRET = var.cluster_api_secret
-      ORIGIN_ALLOWED = "http://${aws_s3_bucket.pacman.website_endpoint}"
+      ORIGIN_ALLOWED = "http://${data.aws_s3_bucket.pacman.website_endpoint}"
     }
   }
 }
@@ -298,7 +298,7 @@ resource "aws_api_gateway_integration_response" "highest_score_options_integrati
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'*'"
     "method.response.header.Access-Control-Allow-Methods" = "'POST'"
-    "method.response.header.Access-Control-Allow-Origin" = "'http://${aws_s3_bucket.pacman.website_endpoint}'"
+    "method.response.header.Access-Control-Allow-Origin" = "'http://${data.aws_s3_bucket.pacman.website_endpoint}'"
   }
 }
 
@@ -362,7 +362,7 @@ resource "aws_lambda_function" "scoreboard_function" {
       BOOTSTRAP_SERVERS = var.bootstrap_server
       CLUSTER_API_KEY = var.cluster_api_key
       CLUSTER_API_SECRET = var.cluster_api_secret
-      ORIGIN_ALLOWED = "http://${aws_s3_bucket.pacman.website_endpoint}"
+      ORIGIN_ALLOWED = "http://${data.aws_s3_bucket.pacman.website_endpoint}"
     }
   }
 }
