@@ -1,0 +1,11 @@
+= Testing
+Stress test the application using JMeter
+
+== What you are Going to Need?
+
+* *JMeter* - You need to have JMeter Installed
++
+[source,bash]
+----
+brew install jmeter
+----
