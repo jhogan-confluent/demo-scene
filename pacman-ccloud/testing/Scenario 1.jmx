@@ -31,9 +31,9 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">500</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1373789594000</longProp>
         <longProp name="ThreadGroup.end_time">1373789594000</longProp>
@@ -45,24 +45,14 @@ Make test last 1 minute (see Scheduler)</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Variable" enabled="true">
-          <stringProp name="maximumValue"></stringProp>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Username" enabled="true">
+          <stringProp name="maximumValue">100</stringProp>
           <stringProp name="minimumValue">1</stringProp>
-          <stringProp name="outputFormat"></stringProp>
-          <boolProp name="perThread">false</boolProp>
+          <stringProp name="outputFormat">USER_000</stringProp>
+          <boolProp name="perThread">true</boolProp>
           <stringProp name="randomSeed"></stringProp>
-          <stringProp name="variableName"></stringProp>
+          <stringProp name="variableName">USERNAME</stringProp>
         </RandomVariableConfig>
-        <hashTree/>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Create Username" enabled="true">
-          <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="script">import java.util.UUID;
-
-vars.put(&quot;username&quot;,UUID.randomUUID().toString());</stringProp>
-          <stringProp name="scriptLanguage">groovy</stringProp>
-        </JSR223Sampler>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="KSQL HighScore Query" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -217,7 +207,7 @@ vars.put(&quot;username&quot;,UUID.randomUUID().toString());</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;user&quot;:&quot;Tek&quot;,&quot;game&quot;:{&quot;score&quot;:8089,&quot;lives&quot;:2,&quot;level&quot;:1}}</stringProp>
+                <stringProp name="Argument.value">{&quot;user&quot;:&quot;${USERNAME}&quot;,&quot;game&quot;:{&quot;score&quot;:${__Random(1,10000000)},&quot;lives&quot;:2,&quot;level&quot;:1}}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -298,7 +288,7 @@ vars.put(&quot;username&quot;,UUID.randomUUID().toString());</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;user&quot;:&quot;Gian&quot;}</stringProp>
+                <stringProp name="Argument.value">{&quot;user&quot;:&quot;${USERNAME}&quot;}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
