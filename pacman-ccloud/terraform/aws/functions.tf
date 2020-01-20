@@ -171,7 +171,8 @@ resource "aws_lambda_function" "event_handler_function" {
       BOOTSTRAP_SERVERS = var.bootstrap_server
       CLUSTER_API_KEY = var.cluster_api_key
       CLUSTER_API_SECRET = var.cluster_api_secret
-      ORIGIN_ALLOWED = "http://${data.aws_s3_bucket.pacman.website_endpoint}"
+      ORIGIN_ALLOWED = "*"
+ //     ORIGIN_ALLOWED = "http://${data.aws_s3_bucket.pacman.website_endpoint}"
     }
   }
 }

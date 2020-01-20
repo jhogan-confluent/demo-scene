@@ -20,6 +20,8 @@ import static io.confluent.cloud.pacman.KafkaUtils.*;
 public class EventHandler implements RequestHandler<Map<String, Object>, Map<String, Object>> {
 
     public Map<String, Object> handleRequest(final Map<String, Object> request, final Context context) {
+
+
         
         final Map<String, Object> requestHeaders =
             (Map<String, Object>) request.get(HEADERS_KEY);
@@ -32,8 +34,11 @@ public class EventHandler implements RequestHandler<Map<String, Object>, Map<Str
 
         if (requestHeaders.containsKey(ORIGIN_KEY)) {
 
+            
+
             final String origin = (String) requestHeaders.get(ORIGIN_KEY);
-            if (origin.equals(ORIGIN_ALLOWED)) {
+            boolean isOriginAllowed = ORIGIN_ALLOWED.equals("*") || origin.equals(ORIGIN_ALLOWED) ;
+            if (isOriginAllowed) {
                 if (request.containsKey(QUERY_PARAMS_KEY) && request.containsKey(BODY_KEY)) {
         
                     final String event = (String) request.get(BODY_KEY);
