@@ -3,9 +3,20 @@ Stress test the application using JMeter
 
 == What you are Going to Need?
 
-* *JMeter* - You need to have JMeter Installed
-+
-[source,bash]
-----
-brew install jmeter
-----
+* *JMeter* - You need to have JMeter Installed and in your PATH variable
+
+== Modify the test using UI
+
+```sh
+cd testing
+jmeter -t test_pacman_api.jmx
+```
+
+== Run the test
+
+```sh
+cd testing
+jmeter -q pacman_api.properties -n -t test_pacman_api.jmx -l test_results.jtl
+```
+
+

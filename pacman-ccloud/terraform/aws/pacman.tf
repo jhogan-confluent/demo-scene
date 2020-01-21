@@ -139,6 +139,21 @@ resource "aws_s3_bucket_object" "shared_js" {
   content = data.template_file.shared_js.rendered
 }
 
+data "template_file" "jmeter_config" {
+  template = file("../../testing/pacman_api.properties.template")
+  vars = {
+    event_handler_api = "${aws_api_gateway_deployment.event_handler_v1.invoke_url}${aws_api_gateway_resource.event_handler_resource.path}"
+    ksqldb_query_api = "http://${aws_alb.ksqldb_lbr.dns_name}/query"
+    scoreboard_api = "${aws_api_gateway_deployment.scoreboard_v1.invoke_url}${aws_api_gateway_resource.scoreboard_resource.path}"
+ 
+  }
+}
+
+resource "local_file" "jmeter_config" {
+  content  = "${data.template_file.jmeter_config.rendered}"
+  filename = "../../testing/pacman_api.properties"
+}
+
 ###########################################
 ################# Sounds ##################
 ###########################################
