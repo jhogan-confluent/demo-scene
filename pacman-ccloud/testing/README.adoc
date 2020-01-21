@@ -16,7 +16,17 @@ jmeter -t test_pacman_api.jmx
 
 ```sh
 cd testing
-jmeter -q pacman_api.properties -n -t test_pacman_api.jmx -l test_results.jtl
+jmeter -n -q pacman_api.properties -t test_pacman_api.jmx -l output/test_results.jtl -o output/report -j output/jmeter.logs
+jmeter -g output/test_results.jtl -o output/report -j output/jmeter.logs
 ```
+
+== Open the dashboard
+
+```sh
+cd testing
+open output/report/index.html
+```
+
+Now you can open the dashboard
 
 

@@ -1,4 +1,5 @@
 pacman_api.properties
+output
 report-output
 jmeter.log
 test_results.jtl
