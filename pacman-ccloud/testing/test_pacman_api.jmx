@@ -55,6 +55,11 @@ Make test last 1 minute (see Scheduler)</stringProp>
               <stringProp name="Argument.value">${__P(SCOREBOARD_API)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="score" elementType="Argument">
+              <stringProp name="Argument.name">score</stringProp>
+              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
@@ -93,6 +98,17 @@ Make test last 1 minute (see Scheduler)</stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.net.URL;
+URL url = new URL(vars.get(&quot;KSQLDB_QUERY_API&quot;));
+sampler.setProtocol(url.getProtocol());
+sampler.setDomain(url.getHost());
+sampler.setPath(url.getPath());</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
@@ -143,18 +159,6 @@ Make test last 1 minute (see Scheduler)</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">import java.net.URL;
-
-URL url = new URL(vars.get(&quot;KSQLDB_QUERY_API&quot;));
-sampler.setProtocol(url.getProtocol());
-sampler.setDomain(url.getHost());
-sampler.setPath(url.getPath());</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Scoreboard API" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -175,6 +179,18 @@ sampler.setPath(url.getPath());</stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.net.URL;
+
+URL url = new URL(vars.get(&quot;SCOREBOARD_API&quot;));
+sampler.setProtocol(url.getProtocol());
+sampler.setDomain(url.getHost());
+sampler.setPath(url.getPath());</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
@@ -225,18 +241,6 @@ sampler.setPath(url.getPath());</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">import java.net.URL;
-
-URL url = new URL(vars.get(&quot;SCOREBOARD_API&quot;));
-sampler.setProtocol(url.getProtocol());
-sampler.setDomain(url.getHost());
-sampler.setPath(url.getPath());</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Event API - USER_GAME" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -244,7 +248,7 @@ sampler.setPath(url.getPath());</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;user&quot;:&quot;${USERNAME}&quot;,&quot;game&quot;:{&quot;score&quot;:${__Random(1,10000000)},&quot;lives&quot;:2,&quot;level&quot;:1}}</stringProp>
+                <stringProp name="Argument.value">{&quot;user&quot;:&quot;${USERNAME}&quot;,&quot;game&quot;:{&quot;score&quot;:${score},&quot;lives&quot;:2,&quot;level&quot;:1}}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -264,6 +268,26 @@ sampler.setPath(url.getPath());</stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.net.URL;
+import java.util.concurrent.ThreadLocalRandom;
+
+URL url = new URL(vars.get(&quot;EVENT_HANDLER_API&quot;));
+sampler.setProtocol(url.getProtocol());
+sampler.setDomain(url.getHost());
+sampler.setPath(url.getPath()+&quot;?topic=USER_GAME&quot;);
+
+int count = ThreadLocalRandom.current().nextInt(100);
+
+int value = Integer.parseInt(vars.get(&quot;score&quot;))+count;
+log.info(&quot; value : &quot; +  value );
+vars.put(&quot;score&quot;,String.valueOf(value))
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
@@ -317,18 +341,6 @@ sampler.setPath(url.getPath());</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
-          <hashTree/>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">import java.net.URL;
-
-URL url = new URL(vars.get(&quot;EVENT_HANDLER_API&quot;));
-sampler.setProtocol(url.getProtocol());
-sampler.setDomain(url.getHost());
-sampler.setPath(url.getPath()+&quot;?topic=USER_GAME&quot;);</stringProp>
-          </BeanShellPreProcessor>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Event API - USER_LOSSES" enabled="true">
@@ -357,6 +369,18 @@ sampler.setPath(url.getPath()+&quot;?topic=USER_GAME&quot;);</stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.net.URL;
+
+URL url = new URL(vars.get(&quot;EVENT_HANDLER_API&quot;));
+sampler.setProtocol(url.getProtocol());
+sampler.setDomain(url.getHost());
+sampler.setPath(url.getPath()+&quot;?topic=USER_LOSSES&quot;);</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
@@ -410,18 +434,6 @@ sampler.setPath(url.getPath()+&quot;?topic=USER_GAME&quot;);</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
-          <hashTree/>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">import java.net.URL;
-
-URL url = new URL(vars.get(&quot;EVENT_HANDLER_API&quot;));
-sampler.setProtocol(url.getProtocol());
-sampler.setDomain(url.getHost());
-sampler.setPath(url.getPath()+&quot;?topic=USER_LOSSES&quot;);</stringProp>
-          </BeanShellPreProcessor>
           <hashTree/>
         </hashTree>
       </hashTree>

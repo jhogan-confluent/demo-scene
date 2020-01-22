@@ -1,0 +1,17 @@
+---
+    version: '3'
+    services:
+      ksqldb-cli:
+        image: confluentinc/ksqldb-cli:0.6.0
+        container_name: ksqldb-cli
+        tty: true
+        volumes:
+          - ./../pipeline/queries.sql/:/queries.sql
+        # command: 
+        #   # In the command section, $ are replaced with $$ to avoid the error 'Invalid interpolation format for "command" option'
+        #   - bash 
+        #   - -c 
+        #   - |
+        #     chmod +x /home/demo/scripts/ksql_start_demo.sh
+        #     /home/demo/scripts/ksql_start_demo.sh
+        #     sleep infinity

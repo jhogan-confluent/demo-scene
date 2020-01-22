@@ -1,0 +1,19 @@
+= Prepare the Confluent Cloud environment
+
+docker exec -it ksqldb-cli ksql <YOUR-KSQL-URL>
+
+
+[source,bash]
+----
+# cd in this directory
+cd ccloud
+
+docker-compose up -d
+docker exec -it ksqldb-cli ksql <YOUR-KSQL-URL>
+----
+
+
+[source,bash]
+----
+RUN SCRIPT 'queries.sql';
+----

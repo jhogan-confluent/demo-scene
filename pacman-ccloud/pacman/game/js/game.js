@@ -61,7 +61,8 @@ function initGame(newGame) {
 	getScoreboardJson(function(sc){
 		
 		SCOREBOARD = sc?sc:SCOREBOARD;
-		RANKING = calcRankingFromScoreboard(SCOREBOARD, window.name);
+		var newRanking = calcRankingFromScoreboard(SCOREBOARD, window.name);
+		RANKING = newRanking?newRanking:RANKING;
 
 		if (RANKING === 0) {
 			$('#rank span').html("-");

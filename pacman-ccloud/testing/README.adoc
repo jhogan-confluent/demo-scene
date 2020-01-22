@@ -9,14 +9,14 @@ Stress test the application using JMeter
 
 ```sh
 cd testing
-jmeter -t test_pacman_api.jmx
+jmeter -t test_pacman_api.jmx -l output/test_results.jtl -o output/report -j output/jmeter.logs
 ```
 
 == Run the test
 
 ```sh
 cd testing
-jmeter -n -q pacman_api.properties -t test_pacman_api.jmx -l output/test_results.jtl -o output/report -j output/jmeter.logs
+JVM_ARGS="-Xms1024m -Xmx2048m" jmeter -n -q pacman_api.properties -t test_pacman_api.jmx -l output/test_results.jtl -o output/report -j output/jmeter.logs
 jmeter -g output/test_results.jtl -o output/report -j output/jmeter.logs
 ```
 
