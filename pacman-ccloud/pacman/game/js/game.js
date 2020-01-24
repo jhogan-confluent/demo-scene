@@ -85,8 +85,8 @@ function initGame(newGame) {
 	scoreboardWorker.onmessage = function(event) {
 		SCOREBOARD = event.data;
 		window.localStorage.setItem("playersScores", JSON.stringify(SCOREBOARD));
-		RANKING = calcRankingFromScoreboard(SCOREBOARD, window.name);
-
+		var newRanking = calcRankingFromScoreboard(SCOREBOARD, window.name);
+		RANKING = newRanking?newRanking:RANKING;
 	};
 
 	var lastScore = 0;

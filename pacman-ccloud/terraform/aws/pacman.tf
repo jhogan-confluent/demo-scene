@@ -120,6 +120,7 @@ resource "aws_s3_bucket_object" "js_files" {
   key = var.js_files[count.index]
   content_type = "text/javascript"
   source = "../../pacman/${var.js_files[count.index]}"
+  etag   = "${filemd5("../../pacman/${var.js_files[count.index]}")}"
 }
 
 data "template_file" "shared_js" {
@@ -180,4 +181,5 @@ resource "aws_s3_bucket_object" "snd_files" {
   key = var.snd_files[count.index]
   content_type = "audio/mpeg"
   source = "../../pacman/${var.snd_files[count.index]}"
+  etag   = "${filemd5("../../pacman/${var.snd_files[count.index]}")}"
 }
