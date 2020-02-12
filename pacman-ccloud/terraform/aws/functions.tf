@@ -140,7 +140,7 @@ POLICY
 }
 
 resource "aws_iam_role" "event_handler_role" {
-  name = "event_handler_role"
+  name = "${var.global_prefix}_event_handler_role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -162,7 +162,8 @@ resource "aws_lambda_function" "event_handler_function" {
     null_resource.build_functions,
     aws_iam_role.event_handler_role,
     aws_s3_bucket.pacman]
-  function_name = "event_handler"
+  function_name = "${var.global_prefix}_event_handler"
+
   filename = "functions/deploy/aws-functions-1.0.jar"
   handler = "io.confluent.cloud.pacman.EventHandler"
   role = aws_iam_role.event_handler_role.arn
@@ -356,7 +357,7 @@ resource "aws_lambda_function" "scoreboard_function" {
     null_resource.build_functions,
     aws_iam_role.scoreboard_role,
     aws_s3_bucket.pacman]
-  function_name = "scoreboard"
+  function_name = "${var.global_prefix}_scoreboard"
   filename = "functions/deploy/aws-functions-1.0.jar"
   handler = "io.confluent.cloud.pacman.Scoreboard"
   role = aws_iam_role.scoreboard_role.arn
