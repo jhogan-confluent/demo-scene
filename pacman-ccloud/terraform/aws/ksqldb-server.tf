@@ -40,7 +40,7 @@ POLICY
 }
 
 resource "aws_iam_role" "ksqldb_server_role" {
-  name = "ksqldb_server_role"
+  name = "${var.global_prefix}_ksqldb_server_role"
   assume_role_policy = data.aws_iam_policy_document.ksqldb_server_policy_document.json
 }
 

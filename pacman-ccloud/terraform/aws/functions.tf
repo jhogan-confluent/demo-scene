@@ -334,7 +334,7 @@ POLICY
 }
 
 resource "aws_iam_role" "scoreboard_role" {
-  name = "scoreboard_role"
+  name = "${var.global_prefix}_scoreboard_role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
