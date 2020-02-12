@@ -49,6 +49,7 @@ resource "aws_s3_bucket_object" "css_files" {
   key = var.css_files[count.index]
   content_type = "text/css"
   source = "../../pacman/${var.css_files[count.index]}"
+  etag   = "${filemd5("../../pacman/${var.js_files[count.index]}")}"
 }
 
 ###########################################

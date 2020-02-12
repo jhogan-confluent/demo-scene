@@ -17,3 +17,4 @@ docker exec -it ksqldb-cli ksql <YOUR-KSQL-URL>
 ----
 RUN SCRIPT 'queries.sql';
 ----
+
