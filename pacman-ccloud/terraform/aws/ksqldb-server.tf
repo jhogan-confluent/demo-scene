@@ -117,7 +117,7 @@ resource "aws_appautoscaling_target" "ksqldb_server_auto_scaling_target" {
 
 resource "aws_appautoscaling_policy" "ksqldb_server_auto_scaling_up" {
   depends_on = [aws_appautoscaling_target.ksqldb_server_auto_scaling_target]
-  name = "ksqldb_server_auto_scaling_up"
+  name = "${var.global_prefix}_ksqldb_server_auto_scaling_up"
   service_namespace  = "ecs"
   resource_id = "service/${aws_ecs_cluster.ksqldb_server_cluster.name}/${aws_ecs_service.ksqldb_server_service.name}"
   scalable_dimension = "ecs:service:DesiredCount"
@@ -133,7 +133,7 @@ resource "aws_appautoscaling_policy" "ksqldb_server_auto_scaling_up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "ksqldb_server_cpu_high_alarm" {
-  alarm_name = "ksqldb_server_cpu_high_alarm"
+  alarm_name = "${var.global_prefix}_ksqldb_server_cpu_high_alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods = "2"
   metric_name = "CPUUtilization"
@@ -150,7 +150,7 @@ resource "aws_cloudwatch_metric_alarm" "ksqldb_server_cpu_high_alarm" {
 
 resource "aws_appautoscaling_policy" "ksqldb_server_auto_scaling_down" {
   depends_on = [aws_appautoscaling_target.ksqldb_server_auto_scaling_target]
-  name = "ksqldb_server_auto_scaling_down"
+  name = "${var.global_prefix}_ksqldb_server_auto_scaling_down"
   service_namespace  = "ecs"
   resource_id = "service/${aws_ecs_cluster.ksqldb_server_cluster.name}/${aws_ecs_service.ksqldb_server_service.name}"
   scalable_dimension = "ecs:service:DesiredCount"
@@ -166,7 +166,7 @@ resource "aws_appautoscaling_policy" "ksqldb_server_auto_scaling_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "ksqldb_server_cpu_low_alarm" {
-  alarm_name = "ksqldb_server_cpu_low_alarm"
+  alarm_name = "${var.global_prefix}_ksqldb_server_cpu_low_alarm"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods = "2"
   metric_name = "CPUUtilization"

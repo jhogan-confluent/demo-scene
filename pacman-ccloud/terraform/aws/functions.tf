@@ -20,7 +20,7 @@ data "template_file" "wake_up_function" {
 
 resource "aws_api_gateway_rest_api" "event_handler_api" {
   depends_on = [aws_lambda_function.event_handler_function]
-  name = "event_handler_api"
+  name = "${var.global_prefix}_event_handler_api"
   description = "Event Handler API"
   endpoint_configuration {
     types = ["REGIONAL"]
@@ -391,7 +391,7 @@ resource "aws_lambda_permission" "scoreboard_cloudwatch_trigger" {
 }
 
 resource "aws_cloudwatch_event_rule" "scoreboard_every_one_minute" {
-    name = "execute-scoreboard-every-one-minute"
+    name = "${var.global_prefix}-execute-scoreboard-every-one-minute"
     description = "Execute the scoreboard function every one minute"
     schedule_expression = "rate(1 minute)"
 }
