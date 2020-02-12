@@ -30,7 +30,7 @@ resource "aws_api_gateway_rest_api" "event_handler_api" {
 resource "aws_api_gateway_resource" "event_handler_resource" {
   rest_api_id = aws_api_gateway_rest_api.event_handler_api.id
   parent_id = aws_api_gateway_rest_api.event_handler_api.root_resource_id
-  path_part = "event"
+  path_part = "${var.global_prefix}_event"
 }
 
 resource "aws_api_gateway_method" "event_handler_post_method" {
@@ -225,7 +225,7 @@ resource "aws_api_gateway_rest_api" "scoreboard_api" {
 resource "aws_api_gateway_resource" "scoreboard_resource" {
   rest_api_id = aws_api_gateway_rest_api.scoreboard_api.id
   parent_id = aws_api_gateway_rest_api.scoreboard_api.root_resource_id
-  path_part = "scoreboard"
+  path_part = "${var.global_prefix}_scoreboard"
 }
 
 resource "aws_api_gateway_method" "scoreboard_get_method" {
