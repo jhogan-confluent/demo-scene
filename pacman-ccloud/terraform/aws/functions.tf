@@ -197,7 +197,7 @@ resource "aws_lambda_permission" "event_handler_cloudwatch_trigger" {
 }
 
 resource "aws_cloudwatch_event_rule" "event_handler_every_five_minutes" {
-    name = "execute-event-handler-every-five-minutes"
+    name = "${var.global_prefix}-execute-event-handler-every-five-minutes"
     description = "Execute the event handler function every five minutes"
     schedule_expression = "rate(5 minutes)"
 }
@@ -215,7 +215,7 @@ resource "aws_cloudwatch_event_target" "event_handler_every_five_minutes" {
 
 resource "aws_api_gateway_rest_api" "scoreboard_api" {
   depends_on = [aws_lambda_function.scoreboard_function]
-  name = "scoreboard_api"
+  name = "${var.global_prefix}_scoreboard_api"
   description = "Scoreboard API"
   endpoint_configuration {
     types = ["REGIONAL"]
