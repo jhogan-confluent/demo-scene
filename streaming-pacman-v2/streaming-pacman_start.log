@@ -1,0 +1,147 @@
+[32m✔ [0mccloud version ok
+[32m✔ [0mlogged into ccloud CLI
+[32m✔ [0mjq found
+
+====== Create new Confluent Cloud stack
+
+---------------------------------------------------------------------------------------------
+Any Confluent Cloud example uses real Confluent Cloud resources that may be billable.
+An example may create a new Confluent Cloud environment, Kafka cluster, topics, ACLs,
+and service accounts, as well as resources that have hourly charges like connectors and
+ksqlDB applications.
+
+To avoid unexpected charges, carefully evaluate the cost of resources before you start.
+After you are done running a Confluent Cloud example, destroy all Confluent Cloud resources
+to avoid accruing hourly charges for services and verify that they have been deleted.
+---------------------------------------------------------------------------------------------
+
+Do you still want to run this script? [y/n] 
+Your token has expired. You are now logged out.
+Error: not logged in
+
+Suggestions:
+    You must be logged in to run this command.
+    To avoid session timeouts, you can save credentials to netrc file with `ccloud login --save`.
+Error: not logged in
+
+Suggestions:
+    You must be logged in to run this command.
+    To avoid session timeouts, you can save credentials to netrc file with `ccloud login --save`.
+Creating Confluent Cloud stack for service account demo-app-4097, ID: .
+Error: not logged in
+
+Suggestions:
+    You must be logged in to run this command.
+    To avoid session timeouts, you can save credentials to netrc file with `ccloud login --save`.
+ERROR: Failed to create environment ccloud-stack--streaming-pacman. Please troubleshoot (maybe run ./clean.sh) and run again
+[32m✔ [0mccloud version ok
+[32m✔ [0mlogged into ccloud CLI
+[32m✔ [0mjq found
+
+====== Create new Confluent Cloud stack
+
+---------------------------------------------------------------------------------------------
+Any Confluent Cloud example uses real Confluent Cloud resources that may be billable.
+An example may create a new Confluent Cloud environment, Kafka cluster, topics, ACLs,
+and service accounts, as well as resources that have hourly charges like connectors and
+ksqlDB applications.
+
+To avoid unexpected charges, carefully evaluate the cost of resources before you start.
+After you are done running a Confluent Cloud example, destroy all Confluent Cloud resources
+to avoid accruing hourly charges for services and verify that they have been deleted.
+---------------------------------------------------------------------------------------------
+
+Do you still want to run this script? [y/n] 
+Your token has expired. You are now logged out.
+Error: not logged in
+
+Suggestions:
+    You must be logged in to run this command.
+    To avoid session timeouts, you can save credentials to netrc file with `ccloud login --save`.
+Error: not logged in
+
+Suggestions:
+    You must be logged in to run this command.
+    To avoid session timeouts, you can save credentials to netrc file with `ccloud login --save`.
+Creating Confluent Cloud stack for service account demo-app-16982, ID: .
+Error: not logged in
+
+Suggestions:
+    You must be logged in to run this command.
+    To avoid session timeouts, you can save credentials to netrc file with `ccloud login --save`.
+ERROR: Failed to create environment ccloud-stack--streaming-pacman. Please troubleshoot (maybe run ./clean.sh) and run again
+[32m✔ [0mccloud version ok
+[32m✔ [0mlogged into ccloud CLI
+[32m✔ [0mjq found
+
+====== Create new Confluent Cloud stack
+
+---------------------------------------------------------------------------------------------
+Any Confluent Cloud example uses real Confluent Cloud resources that may be billable.
+An example may create a new Confluent Cloud environment, Kafka cluster, topics, ACLs,
+and service accounts, as well as resources that have hourly charges like connectors and
+ksqlDB applications.
+
+To avoid unexpected charges, carefully evaluate the cost of resources before you start.
+After you are done running a Confluent Cloud example, destroy all Confluent Cloud resources
+to avoid accruing hourly charges for services and verify that they have been deleted.
+---------------------------------------------------------------------------------------------
+
+Do you still want to run this script? [y/n] 
+Creating Confluent Cloud stack for service account demo-app-20063, ID: 182799.
+Set Kafka cluster "lkc-36kzj" as the active cluster for environment "env-mprqq".
+
+Waiting up to 720 seconds for Confluent Cloud cluster to be ready and for credentials to propagate
+.
+Sleeping an additional 80 seconds to ensure propagation of all metadata
+(DEPRECATED) In a future release, api-key and api-secret will be required flags when creating a ksql cluster.
+Set API Key "X7I4ZONAURL3MHQU" as the active API key for "lkc-36kzj".
+
+Client configuration file saved to: stack-configs/java-service-account-182799.config
+[32m✔ [0mstack-configs/java-service-account-182799.config ok
+====== Generate CCloud configurations
+
+Generating component configurations from stack-configs/java-service-account-182799.config
+
+(If you want to run any of these components to talk to Confluent Cloud, these are the configurations to add to the properties file for each component)
+
+Confluent Platform Components:
+delta_configs/schema-registry-ccloud.delta
+delta_configs/replicator-to-ccloud-producer.delta
+delta_configs/ksqldb-server-ccloud.delta
+delta_configs/ksql-datagen.delta
+delta_configs/control-center-ccloud.delta
+delta_configs/metrics-reporter.delta
+delta_configs/rest-proxy.delta
+delta_configs/connect-ccloud.delta
+delta_configs/connector-ccloud.delta
+delta_configs/ak-tools-ccloud.delta
+
+Kafka Clients:
+delta_configs/java_producer_consumer.delta
+delta_configs/java_streams.delta
+delta_configs/python.delta
+delta_configs/dotnet.delta
+delta_configs/go.delta
+delta_configs/node.delta
+delta_configs/cpp.delta
+delta_configs/env.delta
+
+Waiting up to 720 seconds for Confluent Cloud ksqlDB cluster to be UP
+...........................................
+Set Kafka cluster "lkc-36kzj" as the active cluster for environment "env-mprqq".
+
+Associated key X7I4ZONAURL3MHQU to Confluent Cloud Kafka cluster lkc-36kzj at pkc-4kgmg.us-west-2.aws.confluent.cloud:9092
+Validated credentials to Confluent Cloud Schema Registry at https://psrc-q25x7.us-east-2.aws.confluent.cloud
+Validated credentials to Confluent Cloud ksqlDB at https://pksqlc-0xmqq.us-west-2.aws.confluent.cloud:443
+Set Kafka cluster "lkc-36kzj" as the active cluster for environment "env-mprqq".
+
+Associated key X7I4ZONAURL3MHQU to Confluent Cloud Kafka cluster lkc-36kzj at pkc-4kgmg.us-west-2.aws.confluent.cloud:9092
+
+DONE! Connect to your Confluent Cloud UI at https://confluent.cloud/
+
+Local client configuration file written to stack-configs/java-service-account-182799.config
+
+Cloud resources are provisioned and accruing charges. To destroy this demo and associated resources run ->
+    ./stop.sh stack-configs/java-service-account-182799.config
+

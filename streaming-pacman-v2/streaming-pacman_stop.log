@@ -1,0 +1,19 @@
+ERROR: Must supply argument that is the client configuration file created from './start.sh'. (Is it in stack-configs/ folder?) 
+ERROR: Must supply argument that is the client configuration file created from './start.sh'. (Is it in stack-configs/ folder?) 
+ERROR: Must supply argument that is the client configuration file created from './start.sh'. (Is it in stack-configs/ folder?) 
+ERROR: Must supply argument that is the client configuration file created from './start.sh'. (Is it in stack-configs/ folder?) 
+This script will destroy all the resources (including the Confluent Cloud environment) in /Users/gnatali/git/demo-scene-gn/streaming-pacman-v2/stack-configs/java-service-account-182699.config.  Do you want to proceed? [y/n] 
+This script will destroy all the resources (including the Confluent Cloud environment) in /Users/gnatali/git/demo-scene-gn/streaming-pacman-v2/stack-configs/java-service-account-182699.config.  Do you want to proceed? [y/n] 
+
+Destroying Confluent Cloud stack associated to service account id 182699
+Deleted API key "UU4IZGUBF4PGUQJE".
+Deleted API key "EG7XMDTJ3QQWEHVH".
+Deleting ACLs for service account ID 182699
+Deleting KSQLDB: demo-ksqldb-182699 : lksqlc-ov7wp
+ksqlDB app "lksqlc-ov7wp" has been deleted.
+Deleting CLUSTER: demo-kafka-cluster-182699 : lkc-16kq3
+Deleted Kafka cluster "lkc-16kq3".
+Deleting ENVIRONMENT: prefix ccloud-stack-182699 : env-qzmyp
+Deleted environment "env-qzmyp".
+
+Tip: 'ccloud' CLI currently has no environment set
