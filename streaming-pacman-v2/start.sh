@@ -4,7 +4,7 @@
 PRJ_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 UTILS_DIR="${PRJ_DIR}/utils"
 TMP_FOLDER="${PRJ_DIR}/tmp"
-TFS_PATH="${PRJ_DIR}/terraform"
+TFS_PATH="${PRJ_DIR}/terraform/aws"
 STATE_FILE_PATH="${TFS_PATH}/terraform.tfstate"
 STACK_FILEPATH="${TMP_FOLDER}/stack.created"
 ENV_FILEPATH="${TMP_FOLDER}/envs.created"
@@ -12,12 +12,36 @@ export EXAMPLE="streaming-pacman"
 
 LOG_NAME="${EXAMPLE}_start.log"
 
+function create_tfvars_file {
+    cd $PRJ_DIR
+    TERRAFORM_CONFIG="$TFS_PATH/ccloud.auto.tfvars"
+    echo -e "\n# Create a local configuration file $TERRAFORM_CONFIG with the terraform variables"
+    cat <<EOF > $TERRAFORM_CONFIG
+bootstrap_server="$BOOTSTRAP_SERVERS"
+cluster_api_key="$CLOUD_KEY"
+cluster_api_secret="$CLOUD_SECRET"
+ksql_endpoint="$KSQLDB_ENDPOINT"
+ksql_basic_auth_user_info="$KSQLDB_BASIC_AUTH_USER_INFO"
 
-function start_demo {
+EOF
 
-    source $UTILS_DIR/demo_helper.sh
+}
 
+
+function create_infra_with_tf (){
+
+    DELTA_CONFIGS_DIR=delta_configs
+    source $DELTA_CONFIGS_DIR/env.delta
     
+    create_tfvars_file
+    cd $TFS_PATH
+    terraform init
+    terraform apply --auto-approve
+
+}
+
+
+function create_ccloud_resources {
 
     ccloud::validate_version_ccloud_cli 1.7.0 \
         && print_pass "ccloud version ok" \
@@ -77,6 +101,16 @@ function start_demo {
     echo
     
 
+
+}
+
+function start_demo {
+
+    source $UTILS_DIR/demo_helper.sh   
+
+    create_ccloud_resources
+
+    create_infra_with_tf
 
 }
 

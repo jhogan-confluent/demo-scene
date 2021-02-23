@@ -32,3 +32,6 @@ pipeline/ksql-server.properties
 scoreboard/ccloud.properties
 
 stack-configs
+
+streaming-pacman_start.log
+streaming-pacman_stop.log

@@ -116,6 +116,9 @@ ccloud::ccloud_stack_destroy(){
     source delta_configs/env.delta
     SERVICE_ACCOUNT_ID=$(ccloud::get_service_account $CLOUD_KEY) || exit 1
 
+    local environment_id=$(ccloud environment list -o json | jq -r 'map(select(.name | startswith("'"$ENVIRONMENT_NAME_PREFIX"'"))) | .[].id')
+    ccloud environment use $environment_id
+
     echo
     ccloud::destroy_ccloud_stack $SERVICE_ACCOUNT_ID
 

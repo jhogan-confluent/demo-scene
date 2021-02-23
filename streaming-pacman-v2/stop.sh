@@ -22,7 +22,7 @@ function end_demo {
         ccloud::ccloud_stack_destroy $CONFIG_FILE
     fi
 
-    echp "Removing folder: $PRJ_DIR/delta_configs"
+    echo "Removing folder: $PRJ_DIR/delta_configs"
     rm -r $PRJ_DIR/delta_configs
 
     # Destroy Demo Infrastructure using Terraform
