@@ -23,7 +23,7 @@ data "template_file" "generic_wake_up" {
 
 resource "aws_api_gateway_rest_api" "event_handler_api" {
   depends_on = [aws_lambda_function.event_handler_function]
-  name = "event_handler_api"
+  name = "${data.template_file.resource_prefix.rendered}_event_handler_api"
   description = "Event Handler API"
   endpoint_configuration {
     types = ["REGIONAL"]
@@ -111,7 +111,7 @@ resource "aws_api_gateway_integration_response" "event_handler_options_integrati
   status_code = aws_api_gateway_method_response.event_handler_options_method_response.status_code
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'*'"
-    "method.response.header.Access-Control-Allow-Methods" = "'POST'"
+    "method.response.header.Access-Control-Allow-Methods" = "'POST,OPTIONS'"
     "method.response.header.Access-Control-Allow-Origin" = "'http://${aws_s3_bucket.pacman.website_endpoint}'"
   }
 }
@@ -143,7 +143,7 @@ POLICY
 }
 
 resource "aws_iam_role" "event_handler_role" {
-  name = "event_handler_role"
+  name = "${data.template_file.resource_prefix.rendered}_event_handler_role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -165,7 +165,7 @@ resource "aws_lambda_function" "event_handler_function" {
     null_resource.build_functions,
     aws_iam_role.event_handler_role,
     aws_s3_bucket.pacman]
-  function_name = "event_handler"
+  function_name = "${data.template_file.resource_prefix.rendered}_event_handler"
   description = "Backend function for the Event Handler API"
   filename = "functions/deploy/streaming-pacman-1.0.jar"
   source_code_hash = filemd5("functions/deploy/streaming-pacman-1.0.jar")
@@ -188,7 +188,7 @@ resource "aws_lambda_permission" "event_handler_api_gateway_trigger" {
   action = "lambda:InvokeFunction"
   principal = "apigateway.amazonaws.com"
   function_name = aws_lambda_function.event_handler_function.function_name
-  source_arn = "${aws_api_gateway_rest_api.event_handler_api.execution_arn}/${aws_api_gateway_deployment.event_handler_v1.stage_name}/*/*"
+  source_arn = "${aws_api_gateway_rest_api.event_handler_api.execution_arn}/${aws_api_gateway_deployment.event_handler_v1.stage_name}/*"
 }
 
 resource "aws_lambda_permission" "event_handler_cloudwatch_trigger" {
@@ -200,7 +200,7 @@ resource "aws_lambda_permission" "event_handler_cloudwatch_trigger" {
 }
 
 resource "aws_cloudwatch_event_rule" "event_handler_every_minute" {
-  name = "execute-event-handler-every-minute"
+  name = "${data.template_file.resource_prefix.rendered}-execute-event-handler-every-minute"
   description = "Execute the event handler function every minute"
   schedule_expression = "rate(1 minute)"
 }

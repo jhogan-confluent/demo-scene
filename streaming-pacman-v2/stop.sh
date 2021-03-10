@@ -2,6 +2,7 @@
 
 PRJ_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 UTILS_DIR="${PRJ_DIR}/utils"
+TFS_PATH="${PRJ_DIR}/terraform/aws"
 export EXAMPLE="streaming-pacman"
 
 LOG_NAME="${EXAMPLE}_stop.log"
@@ -26,8 +27,8 @@ function end_demo {
     rm -r $PRJ_DIR/delta_configs
 
     # Destroy Demo Infrastructure using Terraform
-    #cd $TFS_PATH
-    #terraform destroy --auto-approve
+    cd $TFS_PATH
+    terraform destroy --auto-approve
 
     #rm -f "${TFS_PATH}/config.auto.tfvars"
     
